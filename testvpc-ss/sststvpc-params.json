@@ -1,0 +1,10 @@
+[
+  {
+    "ParameterKey": "EnvNameTag",
+    "ParameterValue": "ssTstVpc02"
+  },
+ {
+    "ParameterKey": "Subnet01cidr",
+    "ParameterValue": "10.40.0.0/24"
+  }
+]

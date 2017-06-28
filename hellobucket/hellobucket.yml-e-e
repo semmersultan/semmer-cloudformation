@@ -1,0 +1,11 @@
+Resources:
+  HelloBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: jh19880803-helloworld
+      AccessControl: PublicRead
+      Tags:
+       - Key: BucketType
+         Value: joshtest
+       - Key: Bucketversion
+         Value: ver0001

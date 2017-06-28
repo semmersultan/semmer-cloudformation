@@ -1,0 +1,69 @@
+Description: >
+  Semmer test stack, for building some servers and play around
+
+Parameters:
+
+  EnvNameTag:
+    Description: The nametag for the VPC
+    Type: String
+
+  Subnet01cidr:
+    Description: main subnet cidr
+    Type: String
+
+
+
+Resources:
+  ssVpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.40.0.0/16
+      EnableDnsSupport: 'false'
+      EnableDnsHostnames: 'false'
+      InstanceTenancy: 'default'
+      Tags:
+       - Key: Name
+         Value: !Ref EnvNameTag
+  ssDefaultRoute:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref ssVpc
+      Tags:
+       - Key: Name
+         Value: !Ref EnvNameTag
+  ssSubnet:
+    Type: "AWS::EC2::Subnet"
+    Properties: 
+     AvailabilityZone: ap-southeast-2b
+     CidrBlock: !Ref Subnet01cidr
+     VpcId: !Ref ssVpc
+     Tags:
+       - Key: Name
+         Value: !Ref EnvNameTag  
+  ssrouteassoc:
+    Type: "AWS::EC2::SubnetRouteTableAssociation"
+    Properties: 
+     RouteTableId: !Ref ssDefaultRoute
+     SubnetId: !Ref ssSubnet
+  ssIgw: 
+    Type: "AWS::EC2::InternetGateway"
+    Properties: 
+     Tags:
+       - Key: Name
+         Value: !Ref EnvNameTag
+  ssIgwAtt:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId:
+        Ref: ssVpc
+      InternetGatewayId:
+        Ref: ssIgw
+  ssRoute:
+    Type: AWS::EC2::Route
+    DependsOn: [ ssIgw, ssIgwAtt ]
+    Properties:
+      RouteTableId:
+        Ref: ssDefaultRoute
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId:
+        Ref: ssIgw

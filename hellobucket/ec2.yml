@@ -1,0 +1,22 @@
+Resources:
+  EC2H3X4Y0:
+    Type: 'AWS::EC2::Host'
+    Properties: {}
+  EC2VPC35SOY:
+    Type: 'AWS::EC2::VPC'
+    Properties: {}
+    Resources:
+  EC2V34YI2:
+    Type: 'AWS::EC2::Volume'
+    Properties: {}
+
+# With VPC
+Resources:
+  EC2H3X4Y0:
+    Type: 'AWS::EC2::Host'
+    Properties: {}
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: d6418503-73d4-42a4-b641-428d4223f8cd
+    DependsOn:
+      - EC2VPC35SOY

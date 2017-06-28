@@ -1,0 +1,1 @@
+A simple single server with a secgroup, try to put this into a new VPC.
