@@ -13,7 +13,7 @@ Parameters:
     ConstraintDescription: must begin with a letter and contain only alphanumeric
       characters'.
   DBPassword:
-    Default: 'Paycorp1234'
+    Default: 'test1234'
     NoEcho: 'true'
     Description: The database admin account password
     Type: String
