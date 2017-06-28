@@ -37,7 +37,7 @@ Parameters:
   DBMasterPassword:
     Description: Password for the master DB account
     Type: String
-    Default: Paycorp1234
+    Default: test1234
     NoEcho: 'true'
     ConstraintDescription: must be at least 8 characters long.
   VpcId:
