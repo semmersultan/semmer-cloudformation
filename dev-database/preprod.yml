@@ -1,12 +1,17 @@
 ---
-VpcID: vpc-b185e0d5
-VpcCIDR: 172.30.0.0/16
+VpcID: vpc-43ef9827
+VpcCIDR: 192.168.0.0/16
 DBUsername: paycorp
 DBInstanceType: db.m1.small
 DBStorageSize: "100"
 BackupRetention: "30"
-InternalZone: pyc.internal.
-ExternalZone: aws.paycorp.com.au.
 #UseProdConfig: "true"
 #SecurityGroups: ""
-SubnetID: "subnet-b6178bd2"
+DBSubnetGroup: "subnet-e14a7585 , subnet-2f587559"
+DBPassword: semmer1234
+Environment: dev
+DBName : devmysql
+SecurityGroup : sg-3a293f5d 
+DBaz : "ap-souteast-2a,ap-southeast-2b"
+ExternalZone: awsdev.paycorp.com.au.
+InternalZone: paycorp.internal.

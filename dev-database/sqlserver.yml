@@ -40,6 +40,18 @@ Parameters:
   BackupRetention:
     Type: String
     Default: "1"
+ 
+  DBSubnetGroup:
+    Type: CommaDelimitedList
+    NoEcho: true
+
+  DBaz:
+    Type: CommaDelimitedList
+    NoEcho: true
+
+  SecurityGroup:
+    Type: String
+    NoEcho: true
 
 Resources:
 
@@ -47,6 +59,7 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     Properties:
       #VpcId: !Ref VpcID
+      GroupDescription: !Sub "${Environment} SqlServer"
       SecurityGroupIngress:
       - IpProtocol: TCP
         ToPort: 3306
@@ -75,26 +88,17 @@ Resources:
       AllocatedStorage: '5'
       DBInstanceClass: db.t2.small
       Engine: MySQL
-      EngineVersion: 5.6.19
+      EngineVersion: 5.5.53
       MasterUsername: !Ref 'DBUsername'
       MasterUserPassword: !Ref 'DBPassword'
-      DBParameterGroupName: !Ref 'MyRDSParamGroup'
-
-  MyRDSParamGroup:
-    Type: AWS::RDS::DBParameterGroup
-    Properties:
-      Family: MySQL5.6
-      Description: CloudFormation Sample Database Parameter Group
-      Parameters:
-        autocommit: '1'
-        general_log: '1'
-        old_passwords: '0'
-
-  DBSubnetGroup:
+    
+  DBSubnetGroupmysql:
     Type: "AWS::RDS::DBSubnetGroup"
     Properties:
-      SubnetIds: !Ref SubnetID
+      SubnetIds: !Ref DBSubnetGroup
       DBSubnetGroupDescription: !Sub "${Environment} Subnets"
+      #AvailabilityZone: !Ref DBaz
+
 
 
   DBMonitoringRole:
@@ -228,9 +232,9 @@ Resources:
     Type: AWS::Route53::RecordSet
     Properties:
       HostedZoneName: !Ref ExternalZone
-      Name: !Join [ ".", [ !Sub "${Environment}-mssql" , !Ref ExternalZone ] ]
+      Name: !Join [ ".", [ !Sub "${Environment}-mysql" , !Ref ExternalZone ] ]
       Type: CNAME
-      Comment: !Sub "Alias record for ${AWS::StackName} SqlServer DB"
+      Comment: !Sub "Alias record for ${AWS::StackName} MySqlServer DB"
       TTL: '900'
       ResourceRecords:
       - !GetAtt [ SqlServerDB, Endpoint.Address ]
@@ -239,9 +243,9 @@ Resources:
     Type: AWS::Route53::RecordSet
     Properties:
       HostedZoneName: !Ref InternalZone
-      Name: !Join [ ".", [ !Sub "${Environment}-mssql" , !Ref InternalZone ] ]
+      Name: !Join [ ".", [ !Sub "${Environment}-mysql" , !Ref InternalZone ] ]
       Type: CNAME
-      Comment: !Sub "Alias record for ${AWS::StackName} SqlServer DB"
+      Comment: !Sub "Alias record for ${AWS::StackName} MySqlServer DB"
       TTL: '900'
       ResourceRecords:
       - !GetAtt [ SqlServerDB, Endpoint.Address ]
