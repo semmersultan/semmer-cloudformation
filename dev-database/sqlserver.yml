@@ -41,10 +41,6 @@ Parameters:
     Type: String
     Default: "1"
 
-  UseProdConfig:
-    Type: String
-    Default: "false"
-
 Resources:
 
   DBSecurityGroup:
