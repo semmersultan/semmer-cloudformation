@@ -1,0 +1,12 @@
+---
+VpcID: vpc-b185e0d5
+VpcCIDR: 172.30.0.0/16
+DBUsername: paycorp
+DBInstanceType: db.m1.small
+DBStorageSize: "100"
+BackupRetention: "30"
+InternalZone: pyc.internal.
+ExternalZone: aws.paycorp.com.au.
+#UseProdConfig: "true"
+#SecurityGroups: ""
+SubnetID: "subnet-b6178bd2"

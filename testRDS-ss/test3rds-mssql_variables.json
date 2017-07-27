@@ -1,0 +1,18 @@
+[
+  {
+    "ParameterKey": "VpcID",
+    "ParameterValue": "vpc-74167e10"
+  },
+  {
+    "ParameterKey": "VpcCIDR",
+    "ParameterValue": "10.40.0.0/16"
+  },
+  {
+    "ParameterKey": "InternetGatewayID",
+    "ParameterValue": "igw-12648976"
+  },
+  {
+    "ParameterKey": "AvailabilityZones",
+    "ParameterValue": "ap-southeast-2a,ap-southeast-2b,ap-southeast-2c"
+  },
+]
